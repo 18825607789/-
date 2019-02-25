@@ -1,0 +1,90 @@
+{extend name="layout/base"} {block name='title'}添加产品{/block} {block name='zhedie4'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Products/productList',['id' => $p])}">产品列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Products/edit',['id' => $res->prid,'p' => $p])}">修改</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Products/update" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$res->prid}">
+        <input type="hidden" name="pic" value="{$res->prpic}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label for="shuru1">产品名称：</label>
+            <input type="text" name="prname" id="shuru1" class="shuru" value="{$res->prname}" />
+        </p>
+        <p>
+            <label>展示类型：</label>
+            <input type="radio" name="prsid" id="xuanze1" class="hot" value="1" checked />
+            <label for="xuanze1" class="xuanze">热门</label>
+            <input type="radio" name="prsid"  id="xuanze2" class="recommend" value="2" />
+            <label for="xuanze2" class="xuanze">推荐</label>
+        </p>
+        <p>
+            <label for="shuru2">产品类型：</label>
+            <select name="prprcid" id="shuru2" class="shuru">
+                {volist name="res2" id="vo"}
+                <option value="{$vo['prcid']}"<?php if($res->prprcid==$vo['prcid']) echo 'selected'; ?>>{$vo['prcname']}</option>
+                {/volist}
+            </select>
+        </p>
+        <p>
+            <label>产品图片：</label>
+            <input type="file" name="prpic" class="productPic" />
+        </p>
+        <p>
+            <label for="shuru3">产品信息：</label>
+            <div class="productInfor">
+                <p>
+                    <label for="shuru3">货号：</label>
+                    <input type="text" name="prnumber" id="shuru3" class="shuru" value="{$res->prnumber}" />
+                </p>
+                <p>
+                    <label for="shuru4">材质：</label>
+                    <input type="text" name="prmaterial" id="shuru4" class="shuru" value="{$res->prmaterial}" />
+                </p>
+                <p>
+                    <label for="shuru5">尺寸：</label>
+                    <input type="text" name="prsize" id="shuru5" class="shuru" value="{$res->prsize}" />
+                </p>
+                <p>
+                    <label for="shuru6">适用：</label>
+                    <select name="prfit" id="shuru6" class="shuru">
+                        <option value="卧室">卧室</option>
+                        <option value="客厅">客厅</option>
+                        <option value="厨房">厨房</option>
+                        <option value="书房">书房</option>
+                        <option value="阳台">阳台</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="shuru7">风格：</label>
+                    <select name="prstyle" id="shuru7" class="shuru">
+                        <option value="简约">简约</option>
+                        <option value="古风">古风</option>
+                        <option value="现代">现代</option>
+                        <option value="欧式">欧式</option>
+                        <option value="美式">美式</option>
+                        <option value="日韩">日韩</option>
+                    </select>
+                </p>
+            </div>
+        </p>
+        <p>
+            <label for="shuru4">产品简介：</label>
+            <div class="textbox">
+                <textarea name="prsynopsis" id="ncontent" class="textshuru">
+                    {$res->prsynopsis}
+                </textarea>
+            </div>
+        </p>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+    </form>
+</div>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckfinder/ckfinder.js"></script>
+<script>
+var editor = CKEDITOR.replace("ncontent");
+CKFinder.setupCKEditor(editor, '/static/ckfinder/');
+</script>
+{/block}

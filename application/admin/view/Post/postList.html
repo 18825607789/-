@@ -1,0 +1,63 @@
+{extend name="layout/base2"} {block name='title'}帖子列表{/block} {block name='zhedie3'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Post/postList')}">帖子列表</a></p>
+</div>
+<div class="neirong">
+    <div class="luntansearch">
+        <form action="/admin/Post/searchbl" method="post">
+            <div title="版块名称请尽量完整！">
+                <input type="text" name="pblid" class="shuru" placeholder="请尽量输入完整版块名称">
+                <input type="submit" value="按版块搜索" class="subBtn">
+            </div>
+        </form>
+        <form action="/admin/Post/searchblt" method="post">
+            <div title="主题名称请尽量完整！">
+                <input type="text" name="pbltid" class="shuru" placeholder="请尽量输入完整版块主题" />
+                <input type="submit" value="按版块主题搜索" class="subBtn" />
+            </div>
+        </form>
+    </div>
+    <form>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>发帖人</th>
+                <th>主题名称</th>
+                <th>所属版块</th>
+                <th>所属版块主题</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            {volist name="res" id="vo"}
+            <?php 
+            $count--;
+            if($count%2==0){
+                $clssname="even";;
+            }
+            else{
+                $clssname="old";
+            }
+            ?>
+            <tr class="<?php echo($clssname);?>">
+                <td>{$vo.pid}</td>
+                <td>{$res3[$vo.puid]}</td>
+                <td>{$vo.ptitle}</td>
+                <td>{$res7[$vo.pblid]}</td>
+                <td>{$res5[$vo.pbltid]}</td>
+                <td>{$vo.pdate}</td>
+                <td>
+                    <a href="{:url('admin/Post/checkPost',['id' => $vo['pid'],'p' => $id])}"><i class="icon-eye-open"></i>查看</a>
+                    <a href="{:url('admin/Post/delete',['id' => $vo['pid']])}"><i class="icon-trash"></i>删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">
+            <a href="{:url('admin/Post/postList',['id' => 1])}">首页</a>
+            <a href="{:url('admin/Post/postList',['id' => $pre])}">上一页</a>
+            <a href="{:url('admin/Post/postList',['id' => $next])}">下一页</a>
+            <a href="{:url('admin/Post/postList',['id' => $max])}">未页</a>
+        </div>
+    </form>
+</div>
+{/block}

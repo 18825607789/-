@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>{block name='title'}{/block}</title>
+    <link rel="shortcut icon" href="/static/img/logo.ico"/>
+    <link rel="stylesheet" href="/static/css/public.css" />
+    <link rel="stylesheet" href="/static/css/admin.css" />
+</head>
+
+<body>
+    <header id="header" class="">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="nav">
+                    <div class="left">
+                        <div class="logo">
+                            <a href="{:url('admin/Index/index')}"><img src="/static/img/logo.png"/><h1>挫啄企业后台管理系统</h1></a>
+                        </div>
+                        <div class="kaiguan">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </div>
+                    </div>
+                    <form class="nav-search" action="">
+                        <input type="text" class="search" placeholder="搜索" />
+                    </form>
+                    <ul class="right">
+                        <li class="dropdown">username
+                            <ul class="dropdown-menu nav-box">
+                                <li><a href="">我的信息</a></li>
+                                <li><a href="">退出登录</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">{:session('aname')}
+                            <ul class="dropdown-menu nav-box">
+                                <li><a href=""><i class="icon-envelope"></i>我的信息</a></li>
+                                <li><a href="{:url('admin/Index/logout')}"><i class="icon-off"></i>退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- /header -->
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list">
+                    <div class="listBox">控制面板</div>
+                    <ul class="{block name='zhedie1'}{/block}">
+                        <li class="zhedie"><i class="icon-user"></i>管理员管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Admins/adminList')}"><i class="icon-user"></i>管理员列表</a></li>
+                                <li><a href="{:url('admin/Admins/addAdmin')}"><i class="icon-plus"></i>添加管理员</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="{block name='zhedie2'}{/block}">
+                        <li class="zhedie"><i class="icon-list-alt"></i>新闻管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/News/newList')}"><i class="icon-list-alt"></i>新闻列表</a></li>
+                                <li><a href="{:url('admin/News/addNew')}"><i class="icon-plus"></i>添加新闻</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="{block name='zhedie3'}{/block}">
+                        <li class="zhedie"><i class="icon-picture"></i>广告管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Banners/bannerList')}"><i class="icon-picture"></i>广告列表</a></li>
+                                <li><a href="{:url('admin/Banners/addBanner')}"><i class="icon-plus"></i>添加广告</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="{block name='zhedie4'}{/block}">
+                        <li class="zhedie"><i class="icon-th-large"></i>产品管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Productclass/productClassilyList')}"><i class="icon-th-list"></i>产品分类列表</a></li>
+                                <li><a href="{:url('admin/Products/productList')}"><i class="icon-th"></i>产品列表</a></li>
+                                <li><a href="{:url('admin/Productclass/addProductClassily')}"><i class="icon-plus"></i>添加产品分类</a></li>
+                                <li><a href="{:url('admin/Products/addProduct')}"><i class="icon-plus"></i>添加产品</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="{block name='zhedie5'}{/block}">
+                        <li class="zhedie"><i class="icon-file"></i>公司信息<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Infoclass/infoClassilyList')}"><i class="icon-align-justify"></i>信息分类列表</a></li>
+                                <li><a href="{:url('admin/Info/infoList')}"><i class="icon-list"></i>信息列表</a></li>
+                                <li><a href="{:url('admin/Infoclass/addInfoClassily')}"><i class="icon-plus"></i>添加信息分类</a></li>
+                                <li><a href="{:url('admin/Info/addInfo')}"><i class="icon-plus"></i>添加信息</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="{block name='zhedie6'}{/block}">
+                        <li class="zhedie"><i class="icon-comment"></i>留言管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Message/messageList')}"><i class="icon-comment"></i>留言列表</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="listBox">
+                        <a href="{:url('admin/Index/forumIndex')}">前往论坛管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class='list' id="list">
+                    {block name='right-content'}{/block}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container-fluid">
+            <p>CopyRight © 2018-2019 Peck.com</p>
+        </div>
+    </footer>
+    <script src="/static/js/jquery-3.3.1.js"></script>
+    <script src="/static/js/public.js"></script>
+</body>
+
+</html>

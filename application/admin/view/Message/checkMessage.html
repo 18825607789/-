@@ -1,0 +1,37 @@
+{extend name="layout/base"} {block name='title'}查看留言{/block} {block name='zhedie6'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Message/messageList',['id' => $p])}">留言列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Message/checkMessage',['id' => $res->mid,'p' => $p])}">查看留言</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Message/answerMessage" method="post">
+        <input type="hidden" name="id" value="{$res->mid}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label>留言游客：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->mname}" />
+        </p>
+        <p>
+            <label>留言邮箱：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->memail}" />
+        </p>
+        <p>
+            <label>留言手机：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->mphone}" />
+        </p>
+        <p>
+            <label>留言内容：</label>
+            <textarea name="ncontent" class="textshuru" readonly="readonly">{$res->mcontent}</textarea>
+        </p>
+        <p class="queren">
+            <input type="submit" value="回复" class="subBtn" />
+            <a href="{:url('admin/Message/delete',['id' => $res->mid])}" class="subBtn">删除</a>
+        </p>
+    </form>
+</div>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckfinder/ckfinder.js"></script>
+<script>
+var editor = CKEDITOR.replace("ncontent");
+CKFinder.setupCKEditor(editor, '/static/ckfinder/');
+</script>
+{/block}

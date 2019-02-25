@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>{block name='title'}{/block}</title>
+    <link rel="shortcut icon" href="/static/img/logo.ico"/>
+    <link rel="stylesheet" href="/static/css/public.css" />
+    <link rel="stylesheet" href="/static/css/admin.css" />
+</head>
+
+<body>
+    <header id="header" class="">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="nav">
+                    <div class="left">
+                        <div class="logo">
+                            <a href="{:url('admin/Index/forumIndex')}"><img src="/static/img/logo.png"  /><h1>挫啄企业后台管理系统</h1></a>
+                        </div>
+                        <div class="kaiguan">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </div>
+                    </div>
+                    <form class="nav-search" action="">
+                        <input type="text" class="search" placeholder="搜索" />
+                    </form>
+                    <ul class="right">
+                        <li class="dropdown">username
+                            <ul class="dropdown-menu nav-box">
+                                <li><a href="">我的信息</a></li>
+                                <li><a href="">退出登录</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">{:session('aname')}
+                            <ul class="dropdown-menu nav-box">
+                                <li><a href=""><i class="icon-envelope"></i>我的信息</a></li>
+                                <li><a href="{:url('admin/Index/logout')}"><i class="icon-off"></i>退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- /header -->
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list">
+                    <div class="listBox">控制面板</div>
+                    <ul class="{block name='zhedie1'}{/block}">
+                        <li class="zhedie"><i class="icon-user"></i>用户管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Users/userList')}"><i class="icon-user"></i>用户列表</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="{block name='zhedie2'}{/block}">
+                        <li class="zhedie"><i class="icon-th-large"></i>版块管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Block/blockList')}"><i class="icon-th"></i>版块列表</a></li>
+                                <li><a href="{:url('admin/Blocktheme/blockThemeList')}"><i class="icon-th-list"></i>版块主题列表</a></li>
+                                <li><a href="{:url('admin/Block/addBlock')}"><i class="icon-plus"></i>添加版块</a></li>
+                                <li><a href="{:url('admin/Blocktheme/addBlockTheme')}"><i class="icon-plus"></i>添加版块主题</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="{block name='zhedie3'}{/block}">
+                        <li class="zhedie"><i class="icon-list-alt"></i>帖子管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Post/postList')}"><i class="icon-list-alt"></i>帖子列表</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="{block name='zhedie4'}{/block}">
+                        <li class="zhedie"><i class="icon-pencil"></i>回帖管理<i class="icon-chevron-down"></i></li>
+                        <li class="zhedie-menu">
+                            <ul>
+                                <li><a href="{:url('admin/Reply/replyList')}"><i class="icon-list-alt"></i>回帖列表</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="listBox">
+                        <a href="{:url('admin/Index/index')}">前往公司管理</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class='list' id="list">
+                    {block name='right-content'}{/block}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container-fluid">
+            <p>CopyRight © 2018-2019 Peck.com</p>
+        </div>
+    </footer>
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/public.js"></script>
+</body>
+
+</html>

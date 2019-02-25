@@ -1,0 +1,18 @@
+{extend name="layout/base"} {block name='title'}添加信息分类{/block} {block name='zhedie5'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Infoclass/infoClassilyList',['id' => $p])}">信息分类列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Infoclass/edit',['id' => $res->icid,'p' => $p])}">修改</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Infoclass/update" method="post">
+        <input type="hidden" name="id" value="{$res->icid}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label for="shuru1">分类名称：</label>
+            <input type="text" name="icname" id="shuru1" class="shuru" value="{$res->icname}" />
+        </p>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}

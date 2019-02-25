@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>帖子详情</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/forum_detail.css" />
+	<body>
+		<!-- forum_header begin 论坛头部-->
+		{include file="../application/index/view/Forum/forum_header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#forum_header").load("forum_header.html");
+			});
+		</script>
+		<div id="forum_header"></div> -->
+		<!-- forum_header end-->
+		<!-- container begin -->
+		<div id="container">
+			<div class="index_tag">
+				<a href="#">公司论坛</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="company_forum.html" style="color: #5E2B0C;">论坛首页</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="forum_list.html" style="color: #5E2B0C;">企业管理部</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="forum_details.html" style="color: #5E2B0C;">帖子详情</a>
+			</div>
+			<div class="text">
+				<div class="content clearfix">
+					<div class="contentText clearfix">
+						<div class="contentLeft">
+							<?php
+						        require_once("../application/index/controller/connect.php");
+								$id=$_GET['id'];
+								$hit="select phit from post where pid=$id";
+								$resulthit=mysql_query($hit);
+								$rowhit=mysql_fetch_assoc($resulthit);
+								$phit=$rowhit['phit']+1;
+								$sqlhit="update post set phit = $phit where pid=$id";
+								mysql_query($sqlhit);
+								$sql="select uname,pdate,ptitle,pcontent,phit from post inner join users on puid=uid where pid=$id";
+								$result=mysql_query($sql);
+								$row=mysql_fetch_assoc($result);
+								$sql1="select count(*) from reply where rpid=$id";
+								$result1=mysql_query($sql1);
+								$row1=mysql_fetch_row($result1);
+								$count=$row1[0];
+								
+							?>
+							<span class="spanBox autor" style="border-bottom: 1px dotted white; font-size: 16px;">用户：<?php echo($row['uname']);?></span>
+							<span class="spanBox time">发表时间：<?php echo($row['pdate']);?></span>
+							<span class="spanBox read">被查看次数：<?php echo($row['phit']);?></span>
+							<span class="spanBox replay">回复：<?php echo($count);?></span>
+						</div>
+						<div class="contentRight">
+							<h2><?php echo($row['ptitle']);?></h2>
+							<p>
+								<?php echo($row['pcontent']);?>
+							</p>
+						</div>
+					</div>
+					<script type="text/javascript">
+						var $height = $(".contentRight").outerHeight(true);
+						$(".contentLeft").css("height",$height);
+					</script>
+					<div class="replayBox">
+						<form action="admin/Reply/insert" method="post" accept-charset="utf-8">
+							<input type="hidden" name="rpid" value="<?php echo($id);?>">
+							<textarea name="rcontent" class="replaytext" placeholder="请输入内容"></textarea>
+							<input type="text" name="checkno" class="checkno" placeholder="验证码" /><img src="/admin/Checkno/show_captcha" alt="" onclick="this.src=this.src+'?'" class="checkGif"/>
+							<input type="submit" class="reply" value="回复">
+						</form>
+					</div>
+					<h3>用户回复</h3>
+					<?php 
+						$sql2="select uname,rdate,rcontent from reply inner join users on ruid=uid where rpid=$id";
+						$result2=mysql_query($sql2);
+						while($row2=mysql_fetch_assoc($result2)){
+					?>
+					<div class="replayContentText clearfix">
+						<div class="contentLeft">
+							<span class="spanBox autor" style="border-bottom: 1px dotted white; font-size: 16px;">用户：<?php echo($row2['uname']);?></span>
+							<span class="spanBox time">发表时间：<?php echo($row2['rdate']);?></span>
+						</div>
+						<div class="contentRight">
+							<p>
+								<?php echo($row2['rcontent']);?>
+							</p>
+						</div>
+					</div>
+					<?php 
+						}
+					?>
+				</div>
+			</div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Forum/forum_footer.html"}
+		<!-- <div id="forum_footer"></div>
+		<script>
+			$(document).ready(function(e){
+				$("#forum_footer").load("forum_footer.html");
+			});
+		</script> -->
+		<!-- footer end -->
+	</body>
+</html>

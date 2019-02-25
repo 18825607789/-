@@ -1,0 +1,38 @@
+{extend name="layout/base"} {block name='title'}添加管理员{/block} {block name='zhedie1'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Admins/adminList',['id' => $p])}">管理员列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Admins/edit',['id' => $res->aid,'p' => $p])}">修改</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Admins/update" method="post">
+        <input type="hidden" name="id" value="{$res->aid}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label for="shuru1">管理员账号：</label>
+            <input type="text" name="anumber" id="shuru1" class="shuru" value="{$res->anumber}" />
+        </p>
+        <p>
+            <label for="shuru2">管理员名称：</label>
+            <input type="text" name="aname" id="shuru2" class="shuru" value="{$res->aname}" />
+        </p>
+        <p>
+            <label for="shuru3">管理员密码：</label>
+            <input type="password" name="apwd" id="shuru3" class="shuru" value="{$res->apwd}" />
+        </p>
+        <p>
+            <label for="shuru4">确认管理员密码：</label>
+            <input type="password" name="apassword" id="shuru4" class="shuru" value="{$res->apassword}" />
+        </p>
+        <p>
+            <label for="shuru5">管理员权限：</label>
+            <select name="alid" id="shuru5" class="shuru">
+                {volist name="res2" id="vo"}
+                <option value="{$i}"<?php if($res->alid==$vo['lid']) echo 'selected'; ?>>{$vo['lname']}</option>
+                {/volist}
+            </select>
+        </p>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}

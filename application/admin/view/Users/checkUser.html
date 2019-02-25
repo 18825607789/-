@@ -1,0 +1,33 @@
+{extend name="layout/base2"} {block name='title'}查看用户信息{/block} {block name='zhedie1'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Users/userList',['id' => $p])}">用户列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Users/checkUser',['id' => $res->uid,'p' => $p])}">查看用户信息</a></p>
+</div>
+<div class="neirong">
+    <form>
+        <p>
+            <label>用户邮箱：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->uemail}" />
+        </p>
+        <p>
+            <label>账号密码：</label>
+            <input type="password" class="shuru" readonly="readonly" value="{$res->upwd}" />
+        </p>
+        <p>
+            <label>性别：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->usex}" />
+        </p>
+        <p>
+            <label>年龄：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->uage}" />
+        </p>
+        <p>
+            <label>电话：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->uphone}" />
+        </p>
+        <p>
+            <label>所属部门：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->ubltid}" />
+        </p>
+    </form>
+</div>
+{/block}

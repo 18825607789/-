@@ -1,0 +1,32 @@
+{extend name="layout/base"} {block name='title'}添加信息{/block} {block name='zhedie5'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Info/addInfo')}">添加信息</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Info/insert" method="post">
+        <p>
+            <label for="shuru1">信息分类：</label>
+            <select name="iicid" id="shuru1" class="shuru">
+                {volist name='res' id="vo"}
+                <option value="{$vo['icid']}">{$vo['icname']}</option>
+                {/volist}
+            </select>
+        </p>
+        <p>
+            <label>信息内容：</label>
+            <div class="textbox">
+                <textarea name="icontent" class="textshuru" placeholder="请输入新闻内容"></textarea>
+            </div>
+        </p>
+        <p class="queren">
+            <input type="submit" value="发布" class="subBtn" />
+        </p>
+    </form>
+</div>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckfinder/ckfinder.js"></script>
+<script>
+var editor = CKEDITOR.replace("icontent");
+CKFinder.setupCKEditor(editor, '/static/ckfinder/');
+</script>
+{/block}

@@ -1,0 +1,31 @@
+{extend name="layout/base2"} {block name='title'}查看回帖{/block} {block name='zhedie4'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Reply/replyList',['id' => $p])}">回帖列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Reply/checkReply',['id' => $res->rid,'p' => $p])}">查看回帖</a></p>
+</div>
+<div class="neirong">
+    <form>
+        <p>
+            <label>用户：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$uname}" />
+        </p>
+        <p>
+            <label>评论主题：</label>
+            <input type="text" class="shuru" readonly="readonly" value=" {$res.rtitle}" />
+        </p>
+        <p>
+            <label>发表时间：</label>
+            <input type="text" class="shuru" readonly="readonly" value=" {$res.rdate}" />
+        </p>
+        <p>
+            <label>内容：</label>
+            <textarea name="ncontent" class="textshuru" readonly="readonly">{$res.rcontent}</textarea>
+        </p>
+    </form>
+</div>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckfinder/ckfinder.js"></script>
+<script>
+var editor = CKEDITOR.replace("ncontent");
+CKFinder.setupCKEditor(editor, '/static/ckfinder/');
+</script>
+{/block}

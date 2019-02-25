@@ -1,0 +1,60 @@
+{extend name="layout/base"} {block name='title'}广告列表{/block} {block name='zhedie3'}zhediexian{/block} {block name="right-content"}
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    input[type="number"]{
+        -moz-appearance: textfield;
+        text-align: center;
+        width: 50px;
+        height: 30px;
+    }
+</style>
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Banners/bannerList')}">广告列表</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Banners/border" method="post">
+        <table>
+            <tr>
+                <th>广告ID</th>
+                <th>广告URL</th>
+                <th>广告缩略图</th>
+                <th>排序</th>
+                <th>操作</th>
+            </tr>
+            {volist name="res" id="vo"}
+            <?php 
+            $count--;
+            if($count%2==0){
+                $clssname="even";;
+            }
+            else{
+                $clssname="old";
+            }
+            ?>
+            <tr class="<?php echo($clssname);?>">
+                <td>{$vo['bid']}</td>
+                <td>{$vo['burl']}</td>
+                <td><img src="{$vo['bpic']}" class="bannerPic" /></td>
+                <td><input type="number" name="border[{$vo['bid']}]" value="{$vo['border']}" min="0" /></td>
+                <td>
+                    <a href="{:url('admin/Banners/edit',['id' => $vo['bid'],'p' => $id])}"><i class="icon-edit"></i>修改</a>
+                    <a href="{:url('admin/Banners/delete',['id' => $vo['bid']])}"><i class="icon-trash"></i>删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+        <div class="page">
+            <a href="{:url('admin/Banners/bannerList',['id' => 1])}">首页</a>
+            <a href="{:url('admin/Banners/bannerList',['id' => $pre])}">上一页</a>
+            <a href="{:url('admin/Banners/bannerList',['id' => $next])}">下一页</a>
+            <a href="{:url('admin/Banners/bannerList',['id' => $max])}">未页</a>
+        </div>
+    </form>
+</div>
+{/block}

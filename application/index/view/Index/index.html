@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/static/js/js/banner.js"></script>
+	<script type="text/javascript" src="/static/js/js/li_hover.js"></script>
+	<script type="text/javascript" src="/static/js/js/contact_ways_code.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/banner.css" />
+	<link rel="stylesheet" href="/static/css/css/index_container.css" />
+	<body>
+		<!-- header begin -->
+		{include file="../application/index/view/Index/header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#header").load("header.html");
+			});
+		</script>
+		<div id="header"></div> -->
+		<!-- header end -->
+		<!-- banner begin -->
+		<div id="banner">
+			<span class="change left"></span>
+			<?php
+			    require_once("../application/index/controller/connect.php");
+				$sql="select * from banners order by border desc limit 0,1";
+				$bresult=mysql_query($sql);
+				while($brow=mysql_fetch_assoc($bresult)){
+			?>
+			<a href="<?php echo($brow['burl']);?>"><img src="<?php echo($brow['bpic']);?>" class="banner_pic" style="width: 100%; height: 100%;" /></a>
+			<?php
+				}
+			?>
+			<ul class="banner_buttom">
+				<li class="first"></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<span class="change right"></span>
+		</div>
+		<!-- banner end -->
+		<!-- container begin -->
+		<div id="container">
+			<!-- product 产品中心 -->
+			<div class="product">
+				<div class="title">
+					<h2>产品中心<label>Products</label></h2>
+					<ul class="classification">
+						<li class="current">热门</li>
+						<li>推荐</li>
+					</ul>
+				</div>
+				<div class="product_list">
+					<div>
+						<ul class="product_li hot clearfix">
+							<?php
+								$sql1="select prid,prname,prpic from products where prsid=1 limit 0,6";
+								$result1=mysql_query($sql1);
+								while($row1=mysql_fetch_assoc($result1)){
+							?>                  
+							<li>
+								<a href="product_details.html?id=<?php echo($row1['prid']);?>">
+								<img src="<?php echo($row1['prpic']);?>" />
+								<span class="product_name"><?php echo($row1['prname']);?></span>
+								</a>
+							</li>
+                            <?php
+							    }
+							?>
+						</ul>
+					</div>
+					<div style="display: none;">
+						<ul class="product_li recommend clearfix">
+							<?php
+							    $sql2="select prid,prname,prpic from products where prsid=2 limit 0,6";
+							    $result2=mysql_query($sql2);
+							    while($row2=mysql_fetch_assoc($result2)){
+							?>                  
+							<li>
+								<a href="product_details.html?id=<?php echo($row2['prid']);?>">
+								<img src="<?php echo($row2['prpic']);?>" />
+								<span class="product_name"><?php echo($row2['prname']);?></span>
+								</a>
+							</li>
+                            <?php
+							    }
+							?>
+						</ul>
+					</div>
+				</div>
+				<a href="product_center.html" class="more ">MORE</a>
+			</div>
+			<!-- company_introduction 公司介绍  -->
+			<div class="company_introduction">
+				<div class="introduction ">
+					<div class="about_img ">
+						<img src="/static/img/about_us.png " />
+					</div>
+					<div class="about_us ">
+						<div class="title ">
+							<h2>公司介绍<label>About us</label></h2>
+						</div>
+						<div class="company_name">
+							挫啄实木家具有限公司
+						</div>
+						<div class="introduction_content">
+							<p>挫啄实木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，木家具有限公司，是一家采用国际最新技术，专业设计生产实木家具的企业。公司拥有专业设计团队和专业制作团队来打造出与国际接轨的“挫啄”品牌实木家具以其卓越的品质，精湛的工艺，完美的设计享誉业内。自公司成立以来，一贯以品质为主，诚信待人，客户为首的企业经营理念，贯彻落实在每一名员工的身上，生产出书房、客厅<p/>
+						</div>
+						<a href="#" class="more ">MORE</a>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both; "></div>
+			<!-- news_center 新闻中心 -->
+			<div class="news_center ">
+				<div class="title ">
+					<h2>新闻中心<label>News</label></h2>
+				</div>
+				<div class="news_list ">
+					<ul class="clearfix">
+						<?php
+							$sql3="select *  from news order by nid desc limit 0,4";
+							$result3=mysql_query($sql3);
+							while($row3=mysql_fetch_assoc($result3)){
+						?>
+						<li>
+							<a href="#">
+								<img src="<?php echo($row3['npic']);?>" />
+								<span class="problem ">
+									<?php echo($row3['ntitle']);?>
+								</span>
+								<span class="time ">
+									<?php echo($row3['ndate']);?>
+								</span>
+								<span class="news_content ">
+									<?php echo($row3['ncontent']);?>
+								</span>
+								<span class="right_arrow ">
+									<img src="/static/img/right_arrow.png " width="100%" height="100%"/>
+								</span>
+							</a>
+						</li>
+						<?php
+							}
+						?>
+					</ul>
+					<a href="news_list.html" class="more ">MORE</a>
+				</div>
+			</div>
+			<!-- contact us 联系我们 -->
+			<div class="contact ">
+				<div class="contact_us ">
+					<div class="title ">
+						<h2>联系我们<label>Contact Us</label></h2>
+					</div>
+					<form action="/admin/Message/insert" method="post">
+						<div class="information ">
+							<ul class="clearfix">
+								<li>
+                                    <div class="company_information ">
+                                        <div class="company_name ">
+                                            挫啄实木家具有限公司
+                                        </div>
+                                        <div class="contact_way_code ">
+                                            <ul>
+                                                <li class="qq ">
+                                                    <span class="code qq_code ">
+                                                        <img src="/static/img/contect_ways_code/qq_code.png " />
+                                                    </span>
+                                                </li>
+                                                <li class="wechat ">
+                                                    <span class="code wechat_code ">
+                                                        <img src="/static/img/contect_ways_code/wechat_code.png " />
+                                                    </span>
+                                                </li>
+                                                <li class="sina ">
+                                                    <span class="code sina_code ">
+                                                        <img src="/static/img/contect_ways_code/weibo_code.png " />
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+								</li>
+								<li>
+                                    <div class="company_information ">
+                                        <div class="contact_ways ">
+                                            <span class="ways address ">地址：广州市天河区黄埔大道西261号</span>
+                                            <span class="ways postcode ">邮编：510000</span>
+                                            <span class="ways phone_number ">电话：400-888-8888</span>
+                                        </div>
+                                    </div>
+                                </li>
+								<li style="border: none; ">
+                                	<div class="company_information ">
+                                    	<div class="contact_ways ">
+                                        	<span class="ways mobile_phone ">手机：188-2560-7789</span>
+                                            <span class="ways fax ">传真：000-66668888</span>
+                                            <span class="ways e_mail ">邮箱：2586823101@qq.com</span>
+                                        </div>
+                                    </div>
+                               </li>
+							</ul>
+						</div>
+						<div class="message ">
+							<div class="message_input ">
+								<div class="customer_information ">
+									<input type="text" name="mname" class="inp uname " placeholder="姓名 " />
+									<input type="email" name="memail" class="inp email " placeholder="邮箱 " />
+									<input type="text" name="mphone" class="inp phone " placeholder="手机 " />
+								</div>
+								<div class="message_contents ">
+									<textarea name="mcontent" class="ucontect " placeholder="内容 "></textarea>
+								</div>
+								<div class="checkno_submit ">
+									<input type="text" placeholder="验证码 " name="checkno" class="checkno " />
+									<img src="/admin/Checkno/show_captcha" alt="" onclick="this.src=this.src+'?'" />
+									<input type="submit" value="提交" class="submit " />
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Index/footer.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#footer").load("footer.html");
+			});
+		</script>
+		<div id="footer"></div> -->
+		<!-- footer end -->
+	</body>
+</html>

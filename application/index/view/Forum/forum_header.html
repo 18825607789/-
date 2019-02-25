@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>论坛头部</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="static/css/css/public.css" />
+	<link rel="stylesheet" href="static/css/css/forum_header.css" />
+	<body>
+		<!-- forum_header begin 论坛头部-->
+		<div id="forum_header">
+			<div class="forum_header_center">
+				<a href="index.html" class="logo"></a><label class="name">公司论坛</label>
+				<div class="right">
+					<?php
+    					if(isset($_COOKIE["ckuid"])){
+        					echo('<span class="log_but">'.$_COOKIE["ckuname"].'您好!</span>');
+    					}
+    					else{
+        					echo('<span class="log_but"><a href="login.html">登录</a></span><span class="res_but"><a href="register.html">注册</a></span>');
+    					}
+    				?>
+				</div>
+			</div>
+			<div class="forum_header_nav">
+				<div class="nav_center">
+					<ul>
+						<li>
+							<a href="company_forum.html">论坛首页</a>
+						</li>
+						<li>
+							<a href="member_center.html">个人中心</a>
+						</li>
+						<li>
+							<a href="forum_search.html">搜索</a>
+						</li>
+						<li>
+							<a href="forum_help.html">帮助</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- forum_header end-->
+	</body>
+</html>

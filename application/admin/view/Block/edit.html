@@ -1,0 +1,26 @@
+{extend name="layout/base2"} {block name='title'}添加版块{/block} {block name='zhedie2'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Block/blockList',['id' => $p])}">版块列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Block/edit',['id' => $res->blid,'p' => $p])}">修改</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Block/update" method="post">
+        <input type="hidden" name="id" value="{$res->blid}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label for="shuru1">分区名称：</label>
+            <input type="text" name="blname" id="shuru1" class="shuru" value="{$res->blname}" />
+        </p>
+        <p>
+            <label for="shuru2">分区版主：</label>
+            <select name="bluid" id="shuru2" class="shuru">
+                {volist name="res2" id="vo"}
+                <option value="{$vo.uid}"<?php if($res->bluid==$vo['uid']) echo 'selected'; ?>>{$vo['uname']}</option>
+                {/volist}
+            </select>
+        </p>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}

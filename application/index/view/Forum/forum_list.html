@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>论坛列表</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/forum_list.css" />
+	<body>
+		<!-- forum_header begin 论坛头部-->
+		{include file="../application/index/view/Forum/forum_header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#forum_header").load("forum_header.html");
+			});
+		</script>
+		<div id="forum_header"></div> -->
+		<!-- forum_header end-->
+		<!-- container begin -->
+		<div id="container">
+			<?php 
+				require_once("../application/index/controller/connect.php");
+				$id=$_GET['id'];
+				$blid=$_GET['blid'];
+				$sql="select bltname from blocktheme where bltid=$id";
+				$result=mysql_query($sql);
+				$row=mysql_fetch_assoc($result);
+				$sql2="select count(*) from post where pbltid=$id";
+				$result2=mysql_query($sql2);
+				$row2=mysql_fetch_row($result2);
+				$count=$row2[0];
+				$sql3="select uname from block inner join users on bluid=uid where blid=$blid";
+				$result3=mysql_query($sql3);
+				$row3=mysql_fetch_assoc($result3);
+			?>
+			<div class="index_tag">
+				<a href="#">公司论坛</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="company_forum.html" style="color: #5E2B0C;">论坛首页</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="forum_detail.html" style="color: #5E2B0C;"><?php echo($row['bltname']);?></a>
+			</div>
+			<div class="text">
+				<div class="infor">
+					<h4><?php echo($row['bltname']);?></h4>
+					<span>帖数：<?php echo($count);?></span>
+					<span>版主：<?php echo($row3['uname']);?></span>
+					<label>信息：展示部门工作进度，动态等</label>
+				</div>
+				<div class="release">
+					<form action="admin/Post/insert" method="post">
+						<input type="hidden" name="pblid" value="<?php echo($blid);?>">
+						<input type="hidden" name="pbltid" value="<?php echo($id);?>">
+						<input type="text" name="ptitle" id="title" class="title" placeholder="请输入标题" />
+						<textarea name="pcontent" class="releaseText" placeholder="请输入内容"></textarea>
+						<input type="submit" class="send" value="发帖">
+					</form>
+				</div>
+				<div class="list clearfix">
+					
+						<div class="listNav">
+							<label class="labelBox title">主题</label>
+							<div class="labelRight">
+								<label class="labelBox autor">作者</label>
+								<label class="labelBox time">发布时间</label>
+								<label class="labelBox replay">回复</label>
+								<label class="labelBox lookTimes">查看次数</label>
+							</div>
+							<div class="listContent">
+								<?php 
+									$sql1="select ptitle,uname,pdate,pid,phit from post inner join users on puid=uid where pbltid=$id";
+									$result1=mysql_query($sql1);
+									while($row1=mysql_fetch_assoc($result1)){
+								?>
+								<div class="lc">
+									<span class="titleContent">
+										<a href="forum_details.html?id=<?php echo($row1['pid']);?>"><?php echo($row1['ptitle']);?></a>
+									</span>
+									<span class="Content autor">
+										<?php echo($row1['uname']);?>
+									</span>
+									<span class="Content time">
+										<?php echo($row1['pdate']);?>
+									</span>
+									<?php 
+										$id1=$row1['pid'];
+										$sql2="select count(*) from reply where rpid=$id1";
+										$result2=mysql_query($sql2);
+										$row2=mysql_fetch_row($result2);
+										$count=$row2[0];
+									?>
+									<span class="Content replay">
+										<?php echo($count);?>
+									</span>
+									<span class="Content lookTimes">
+										<?php echo($row1['phit']);?>
+									</span>
+								</div>
+								<?php 
+									}
+								?>
+							</div>
+							<div class="page">
+								<ul>
+									<li><</li>
+									<li class="current">1</li>
+									<li>2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>...</li>
+									<li>19</li>
+									<li>></li>
+								</ul>
+							</div>
+						</div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Forum/forum_footer.html"}
+		<!-- <div id="forum_footer"></div>
+		<script>
+			$(document).ready(function(e){
+				$("#forum_footer").load("forum_footer.html");
+			});
+		</script> -->
+		<!-- footer end -->
+	</body>
+</html>

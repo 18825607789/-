@@ -1,0 +1,53 @@
+{extend name="layout/base2"} {block name='title'}回帖列表{/block} {block name='zhedie4'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Reply/replyList')}">回帖列表</a></p>
+</div>
+<div class="neirong">
+    <div class="luntansearch">
+        <form action="/admin/Reply/search" method="post">
+            <div title="帖子标题请尽量完整！">
+                <input type="text" name="rpid" class="shuru" placeholder="请尽量输入完整帖子标题">
+                <input type="submit" value="搜索" class="subBtn">
+            </div>
+        </form>
+    </div>
+    <form>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>用户</th>
+                <th>所属帖子</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            {volist name="res" id="vo"}
+            <?php 
+            $count--;
+            if($count%2==0){
+                $clssname="even";;
+            }
+            else{
+                $clssname="old";
+            }
+            ?>
+            <tr class="<?php echo($clssname);?>">
+                <td>{$vo.rid}</td>
+                <td>{$res3[$vo.ruid]}</td>
+                <td>{$res5[$vo.rpid]}</td>
+                <td>{$vo.rdate}</td>
+                <td>
+                    <a href="{:url('admin/Reply/checkReply',['id' => $vo['rid'],'p' => $id])}"><i class="icon-eye-open"></i>查看</a>
+                    <a href="{:url('admin/Reply/delete',['id' => $vo['rid']])}"><i class="icon-trash"></i>删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">
+            <a href="{:url('admin/Reply/replyList',['id' => 1])}">首页</a>
+            <a href="{:url('admin/Reply/replyList',['id' => $pre])}">上一页</a>
+            <a href="{:url('admin/Reply/replyList',['id' => $next])}">下一页</a>
+            <a href="{:url('admin/Reply/replyList',['id' => $max])}">未页</a>
+        </div>
+    </form>
+</div>
+{/block}

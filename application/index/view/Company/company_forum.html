@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>公司论坛</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/static/js/js/forum_click.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/company_forum.css" />
+	<body>
+		<!-- forum_header begin 论坛头部-->
+		{include file="../application/index/view/Forum/forum_header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#forum_header").load("forum_header.html");
+			});
+		</script>
+		<div id="forum_header"></div> -->
+		<!-- forum_header end-->
+		<!-- container begin -->
+		<div id="container">
+			<div class="forum_index">
+				<div class="index_tag">
+					<a href="#">公司论坛</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="company_forum.html" style="color: #5E2B0C;">论坛首页</a>
+				</div>
+				<?php 
+					require_once("../application/index/controller/connect.php");
+					$shu=0;
+					$sql="select uname,blid,blname from block inner join users on bluid=uid";
+					$result=mysql_query($sql);
+					while($row=mysql_fetch_assoc($result)){
+					$shu++;
+				?>
+				<div class="box work">
+					<div class="title work_title">
+						<h5><?php echo($row['blname']);?></h5>
+						<span class="autor work_autor">分区版主：<?php echo($row['uname']);?><span class="symbol s<?php echo($row['blid']);?>">-</span></span>
+					</div>
+					<div class="list <?php echo($row['blid']);?>">
+						<ul class="clearfix">
+							<?php 
+								$id = $row['blid'];
+								$sql1="select * from blocktheme where bltblid=$id";
+								$result1=mysql_query($sql1);
+								while($row1=mysql_fetch_assoc($result1)){
+							?>
+							<li>
+								<img src="/static/img/qipao.png" />
+								<label class="department_name"><a href="forum_list.html?id=<?php echo($row1['bltid']);?>&blid=<?php echo($row['blid']);?>"><?php echo($row1['bltname']);?></a></label>
+								<?php 
+									$id1=$row1['bltid'];
+									$sql2="select count(*) from post where pbltid=$id1";
+									$result2=mysql_query($sql2);
+									$row2=mysql_fetch_row($result2);
+									$count=$row2[0];
+								?>
+								<label class="infor">帖数：<?php echo($count);?></label>
+							</li>
+							<?php 
+								}
+							?>
+						</ul>
+					</div>
+					
+				</div>
+				<?php 
+					}
+				?>
+			</div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Forum/forum_footer.html"}
+		<!-- <div id="forum_footer"></div>
+		<script>
+			$(document).ready(function(e){
+				$("#forum_footer").load("forum_footer.html");
+			});
+		</script> -->
+		<!-- footer end -->
+	</body>
+</html>

@@ -1,0 +1,11 @@
+{extend name="layout/base2"} {block name='title'}论坛后台首页{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Index/forumIndex')}">论坛后台首页</a></p>
+</div>
+<div class="neirong">
+    <div class="huanying">
+        <p>{:session('aname')}管理员，欢迎来到挫啄企业论坛后台管理系统</p>
+        <p>请选择您需要的选项</p>
+    </div>
+</div>
+{/block}

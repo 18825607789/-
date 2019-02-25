@@ -1,0 +1,16 @@
+{extend name="layout/base"} {block name='title'}添加信息分类{/block} {block name='zhedie5'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Infoclass/addInfoClassily')}">添加信息分类</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Infoclass/insert" method="post">
+        <p>
+            <label for="shuru1">分类名称：</label>
+            <input type="text" name="icname" id="shuru1" class="classifyInput shuru" placeholder="请输入分类名称" />
+        </p>
+        <p class="queren">
+            <input type="submit" value="添加" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}

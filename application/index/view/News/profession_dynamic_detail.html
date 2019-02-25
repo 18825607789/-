@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>动态详情</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/profession_dynamic_detail_container.css" />
+	<body>
+		<!-- header begin -->
+		{include file="../application/index/view/Index/header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#header").load("header.html");
+			});
+		</script>
+		<div id="header"></div> -->
+		<!-- header end -->
+		<!-- container begin -->
+		<div id="container">
+			<!-- post 海报-->
+			<div class="poster">
+				<h2>新闻中心/<label>News</label></h2>
+			</div>
+			<!-- news 新闻 -->
+			<div class="news_content">
+				<div class="classification">
+					<ul>
+						<li>公司新闻</li>
+						<li class="current">行业动态</li>
+					</ul>
+				</div>
+				<div class="news_lists">
+					<div class="text">
+						<div class="nav_title">
+							<a href="index.html">首页</a>&nbsp;>&nbsp;<a href="news_list.html">新闻中心</a>&nbsp;>&nbsp;<a href="#">行业动态</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">动态详情</a>
+						</div>
+						<div class="content">
+							<div class="news_detail_content">
+								<?php
+									$id=$_GET['id'];
+									require_once("../application/index/controller/connect.php");
+									$hit="select nhit from news where nid=$id";
+									$resulthit=mysql_query($hit);
+									$rowhit=mysql_fetch_assoc($resulthit);
+									$nhit=$rowhit['nhit']+1;
+									$sqlhit="update news set nhit = $nhit where nid=$id";
+									mysql_query($sqlhit);
+									$sql="select nauthor,npic,ntitle,ndate,nhit,ncontent from news where nid=$id";
+									$result=mysql_query($sql);
+									$row=mysql_fetch_assoc($result);
+								?>
+								<div class="news_title">
+									<h2><?php echo($row['ntitle'])?></h2>
+								</div>
+								<div class="information">
+									<div class="infor autor">
+										<h4>作者：<?php echo($row['nauthor'])?></h4>
+									</div>
+									<div class="infor time">
+										<h4>时间：<?php echo($row['ndate'])?></h4>
+									</div>
+									<div class="infor click">
+										<h4>点击：<?php echo($row['nhit'])?>次</h4>
+									</div>
+									<div style="clear: both;"></div>
+								</div>
+								<div class="detail">
+									<img src="<?php echo($row['npic'])?>" width="100%" height="100%" />
+									<p><?php echo($row['ncontent'])?></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Index/footer.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#footer").load("footer.html");
+			});
+		</script>
+		<div id="footer"></div> -->
+		<!-- footer end -->
+	</body>
+</html>

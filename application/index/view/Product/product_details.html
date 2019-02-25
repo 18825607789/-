@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>产品详情</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/product_details_container.css" />
+	<body>
+		<!-- header begin -->
+		{include file="../application/index/view/Index/header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#header").load("header.html");
+			});
+		</script>
+		<div id="header"></div> -->
+		<!-- header end -->
+		<!-- container begin -->
+		<div id="container">
+			<!-- post 海报-->
+			<div class="poster">
+				<h2>产品中心/<label>Products</label></h2>
+			</div>
+			<!-- Product 商品 -->
+			<div class="product">
+				<div class="search">
+					<form action="product_center.html" method="get">
+						<input type="search" name="key" placeholder="请输入商品名称" class="search_inp" /><input type="submit" value="搜索" class="sub_inp" />
+					</form>				
+				</div>
+				<div class="classification">
+					<ul>
+						<li class="current">客厅家具</li>
+						<li>书房家具</li>
+						<li>卧室家具</li>
+						<li>餐厅家具</li>
+					</ul>
+				</div>
+				<div class="product_details">
+					<div class="text">
+						<div class="nav_title">
+							<a href="index.html">首页</a>&nbsp;>&nbsp;<a href="product_center.html">产品中心</a>&nbsp;>&nbsp;<a href="product_center.html">客厅家具</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">产品详情</a>
+						</div>
+						<div class="content">
+							<?php 
+								$id=$_GET['id'];
+								require_once("../application/index/controller/connect.php");
+								$sql="select prname,prpic,prnumber,prmaterial,prsize,prfit,prstyle,prsynopsis from products where prid=$id";
+								$result=mysql_query($sql);
+								$row=mysql_fetch_assoc($result);
+							?>
+							<div class="product_pic">
+								<img src="<?php echo($row['prpic']);?>" />
+							</div>
+							<div class="details">
+								<div class="product_name">
+									<h4><?php echo($row['prname']);?></h4>
+								</div>
+								<div class="infor">
+									<div class="bigbox">
+										<div class="smallbox">
+											货号：
+											<span><?php echo($row['prnumber']);?></span>
+										</div>
+									</div>
+									<div class="bigbox">
+										<div class="smallbox">
+											材质：<?php echo($row['prmaterial']);?>
+										</div>
+									</div>
+									<div class="bigbox">
+										<div class="smallbox">
+											尺寸：<?php echo($row['prsize']);?>
+										</div>
+									</div>
+									<div class="bigbox">
+										<div class="smallbox">
+											适用：
+											<span><?php echo($row['prfit']);?></span>
+										</div>
+									</div>
+									<div class="bigbox">
+										<div class="smallbox">
+											风格：
+											<span><?php echo($row['prstyle']);?></span>
+										</div>
+									</div>
+									<div class="bigbox">
+										<div class="smallbox">
+											商品介绍：<?php echo($row['prsynopsis']);?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Index/footer.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#footer").load("footer.html");
+			});
+		</script>
+		<div id="footer"></div> -->
+		<!-- footer end -->
+	</body>
+</html>

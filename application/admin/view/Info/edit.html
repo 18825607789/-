@@ -1,0 +1,36 @@
+{extend name="layout/base"} {block name='title'}添加信息{/block} {block name='zhedie5'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Info/infoList',['id' => $p])}">信息列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Info/edit',['id' => $res->iid,'p' => $p])}">修改</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Info/update" method="post">
+        <input type="hidden" name="id" value="{$res->iid}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label for="shuru1">信息分类：</label>
+            <select name="iicid" id="shuru1" class="shuru">
+                {volist name='res2' id="vo"}
+                <option value="{$vo['icid']}"<?php if($res->iicid==$vo['icid']) echo 'selected'; ?>>{$vo['icname']}</option>
+                {/volist}
+            </select>
+        </p>
+        <p>
+            <label>信息内容：</label>
+            <div class="textbox">
+                <textarea name="icontent" class="textshuru">
+                    {$res->icontent}
+                </textarea>
+            </div>
+        </p>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+    </form>
+</div>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckfinder/ckfinder.js"></script>
+<script>
+var editor = CKEDITOR.replace("icontent");
+CKFinder.setupCKEditor(editor, '/static/ckfinder/');
+</script>
+{/block}

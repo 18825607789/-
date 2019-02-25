@@ -1,0 +1,39 @@
+{extend name="layout/base2"} {block name='title'}查看帖子{/block} {block name='zhedie3'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Post/postList',['id' => $p])}">帖子列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Post/checkPost',['id' => $res->pid,'p' => $p])}">查看帖子</a></p>
+</div>
+<div class="neirong">
+    <form>
+        <p>
+            <label>主题名称：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->ptitle}" />
+        </p>
+        <p>
+            <label>作者：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$uname}" />
+        </p>
+        <p>
+            <label>所属版块：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$blname}" />
+        </p>
+        <p>
+            <label>所属版块主题：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$bltname}" />
+        </p>
+        <p>
+            <label>发表时间：</label>
+            <input type="text" class="shuru" readonly="readonly" value="{$res->pdate}" />
+        </p>
+        <p>
+            <label>内容：</label>
+            <textarea name="ncontent" class="textshuru" readonly="readonly">{$res->pcontent}</textarea>
+        </p>
+    </form>
+</div>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckfinder/ckfinder.js"></script>
+<script>
+var editor = CKEDITOR.replace("ncontent");
+CKFinder.setupCKEditor(editor, '/static/ckfinder/');
+</script>
+{/block}

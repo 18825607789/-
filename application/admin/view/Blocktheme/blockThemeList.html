@@ -1,0 +1,43 @@
+{extend name="layout/base2"} {block name='title'}版块主题列表{/block} {block name='zhedie2'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Blocktheme/blockThemeList')}">版块主题列表</a></p>
+</div>
+<div class="neirong">
+    <form>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>主题名称</th>
+                <th>所属版块</th>
+                <th>操作</th>
+            </tr>
+            {volist name="res" id="vo"}
+            <?php 
+            $count--;
+            if($count%2==0){
+                $clssname="even";;
+            }
+            else{
+                $clssname="old";
+            }
+            ?>
+            <tr class="<?php echo($clssname);?>">
+                <td>{$vo['bltid']}</td>
+                <td>{$vo['bltname']}</td>
+                <td>{$res3[$vo['bltblid']]}</td>
+                <td>
+                    <a href="{:url('admin/Blocktheme/edit',['id' => $vo['bltid'],'p' => $id])}"><i class="icon-edit"></i>修改</a>
+                    <a href="{:url('admin/Blocktheme/delete',['id' => $vo['bltid']])}"><i class="icon-trash"></i>删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">
+            <a href="{:url('admin/Blocktheme/blockThemeList',['id' => 1])}">首页</a>
+            <a href="{:url('admin/Blocktheme/blockThemeList',['id' => $pre])}">上一页</a>
+            <a href="{:url('admin/Blocktheme/blockThemeList',['id' => $next])}">下一页</a>
+            <a href="{:url('admin/Blocktheme/blockThemeList',['id' => $max])}">未页</a>
+        </div>
+    </form>
+</div>
+{/block}

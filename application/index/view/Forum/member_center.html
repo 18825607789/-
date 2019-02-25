@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/static/js/js/change_input.js"></script>
+	<script type="text/javascript" src="/static/js/js/changeServer.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/member_center.css" />
+	<body>
+		<!-- forum_header begin 论坛头部-->
+		{include file="../application/index/view/Forum/forum_header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#forum_header").load("forum_header.html");
+			});
+		</script>
+		<div id="forum_header"></div> -->
+		<!-- forum_header end-->
+		<!-- container begin -->
+		<div id="container">
+			<div class="center clearfix">
+				<div class="index_tag">
+					<a href="#">公司论坛</a>&nbsp;&nbsp;>&nbsp;&nbsp;<a href="member_center.html" style="color: #5E2B0C;">个人中心</a>
+				</div>
+				<div class="left">
+					<h2>个人中心</h2>
+					<ul>
+						<li class="current">个人资料</li>
+						<li>完善资料</li>
+						<li>修改信息</li>
+						<li style="border: none;">安全退出</li>
+					</ul>
+				</div>
+				<div class="right">
+					<?php 
+						require_once("../application/index/controller/connect.php");
+						$id=$_COOKIE['ckuid'];
+						$sql="select uname,uemail,usex,uage,uphone,ubltid from users where uid=$id";
+						$result=mysql_query($sql);
+						$row=mysql_fetch_assoc($result);
+					?>
+					<div style="display: block;">
+						<div class="text">
+							<h2>用户个人资料</h2>
+							<div class="text_box uname">
+								<label>用户名：</label>
+								<p><?php echo($row['uname']);?></p>
+							</div>
+							<div class="text_box uname">
+								<label>用户邮箱：</label>
+								<p><?php echo($row['uemail']);?></p>
+							</div>
+							<div class="text_box sex">
+								<label>性别：</label>
+								<p><?php echo($row['usex']);?></p>
+							</div>
+							<div class="text_box age">
+								<label>年龄：</label>
+								<p><?php echo($row['uage']);?></p>
+							</div>
+							<div class="text_box phone_number">
+								<label>电话：</label>
+								<p><?php echo($row['uphone']);?></p>
+							</div>
+							<div class="text_box department">
+								<label>所属部门：</label>
+								<p><?php 
+										if($row['ubltid']==null){
+											echo("");
+										}else{
+											$ubltid=$row['ubltid'];
+											$sql2="select bltname from blocktheme where bltid=$ubltid";
+											$result2=mysql_query($sql2);
+											$row2=mysql_fetch_assoc($result2);
+											echo($row2['bltname']);
+										}
+									?>
+									</p>
+							</div>
+						</div>
+					</div>
+					<div style="display: none;">
+						<div class="text">
+							<form action="admin/Users/insert1" method="post">
+								<h2>完善个人资料</h2>
+								<div class="text_box uname">
+									<label>用户名：</label>
+									<p><?php echo($row['uname']);?></p>
+								</div>
+								<div class="text_box uname">
+									<label>用户邮箱：</label>
+									<p><?php echo($row['uemail']);?></p>
+								</div>
+								<div class="text_box sex">
+									<label>性别：</label>
+									<input type="radio" name="usex" class="sexChoose" value="男" />男
+									<input type="radio" name="usex" class="sexChoose" value="女" />女
+								</div>
+								<div class="text_box age">
+									<label>年龄：</label>
+										<input type="text" name="uage" class="ageNum" />
+								</div>
+								<div class="text_box phone_number">
+									<label>电话：</label>
+										<input type="text" name="uphone" class="phoneNum" placeholder="请输入电话号码"/>
+								</div>
+								<div class="text_box department">
+									<label>所属部门：</label>
+									<select name="ubltid">
+										<?php 
+											$sql1="select bltid,bltname from blocktheme";
+											$result1=mysql_query($sql1);
+											while($row1=mysql_fetch_assoc($result1)){
+										?>
+										<option value="<?php echo($row1['bltid']);?>"><?php echo($row1['bltname']);?></option>
+										<?php
+											}
+										?>
+									</select>
+								</div>
+								<input type="submit" class="wanshan" value="确定">
+							</form>
+						</div>
+					</div>
+					<div style="display: none;">
+						<div class="text">
+							<form action="admin/Users/update" method="post">
+								<h2>修改个人资料</h2>
+								<div class="text_box uname">
+									<label>用户名：</label>
+									<input type="text" name="uname" value="<?php echo($row['uname']);?>" />
+								</div>
+								<div class="text_box uname">
+									<label>用户邮箱：</label>
+									<input type="email" name="uemail" value="<?php echo($row['uemail']);?>" />
+								</div>
+								<div class="text_box sex">
+									<label>性别：</label>
+									<input type="radio" name="usex" class="sexChoose" value="男" />男
+									<input type="radio" name="usex" class="sexChoose" value="女" />女
+								</div>
+								<div class="text_box age">
+									<label>年龄：</label>
+										<input type="text" name="uage" class="ageNum" value="<?php echo($row['uage']);?>" />
+								</div>
+								<div class="text_box phone_number">
+									<label>电话：</label>
+										<input type="text" name="uphone" class="phoneNum" value="<?php echo($row['uphone']);?>"/>
+								</div>
+								<div class="text_box department">
+									<label>所属部门：</label>
+									<select name="ubltid">
+										<?php 
+											$sql1="select bltid,bltname from blocktheme";
+											$result1=mysql_query($sql1);
+											while($row1=mysql_fetch_assoc($result1)){
+										?>
+										<option value="<?php echo($row1['bltid']);?>" <?php if($row['ubltid']==$row1['bltid']){echo('selected');}?>><?php echo($row1['bltname']);?></option>
+										<?php
+											}
+										?>
+									</select>
+								</div>
+								<input type="submit" class="wanshan" value="修改">
+							</form>
+						</div>
+					</div>
+					<div style="display: none;">
+						<div class="text">
+							<h2>用户安全退出</h2>
+							<div class="member_layout">
+								<p>用户：<?php echo($row['uname']);?></p>
+								<a href="index/Index/logout">退出</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Forum/forum_footer.html"}
+		<!-- <div id="forum_footer"></div>
+		<script>
+			$(document).ready(function(e){
+				$("#forum_footer").load("forum_footer.html");
+			});
+		</script> -->
+		<!-- footer end -->
+	</body>
+</html>

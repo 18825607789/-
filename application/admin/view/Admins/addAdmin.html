@@ -1,0 +1,36 @@
+{extend name="layout/base"} {block name='title'}添加管理员{/block} {block name='zhedie1'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Admins/addAdmin')}">添加管理员</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Admins/insert" method="post">
+        <p>
+            <label for="shuru1">管理员账号：</label>
+            <input type="text" name="anumber" id="shuru1" class="shuru" placeholder="请输入管理员账号" />
+        </p>
+        <p>
+            <label for="shuru2">管理员名称：</label>
+            <input type="text" name="aname" id="shuru2" class="shuru" placeholder="请输入管理员名称" />
+        </p>
+        <p>
+            <label for="shuru3">管理员密码：</label>
+            <input type="password" name="apwd" id="shuru3" class="shuru" placeholder="请输入管理员密码" />
+        </p>
+        <p>
+            <label for="shuru4">确认管理员密码：</label>
+            <input type="password" name="apassword" id="shuru4" class="shuru" placeholder="请再次输入管理员密码" />
+        </p>
+        <p>
+            <label for="shuru5">管理员权限：</label>
+            <select name="alid" id="shuru5" class="shuru">
+                <option value="1">超级管理员</option>
+                <option value="2">公司管理员</option>
+                <option value="3">论坛管理员</option>
+            </select>
+        </p>
+        <p class="queren">
+            <input type="submit" value="添加" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}

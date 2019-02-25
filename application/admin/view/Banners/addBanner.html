@@ -1,0 +1,24 @@
+{extend name="layout/base"} {block name='title'}添加广告{/block} {block name='zhedie3'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Banners/addBanner')}">添加广告</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Banners/insert" method="post" enctype="multipart/form-data">
+        <p>
+            <label for="shuru1">广告URL：</label>
+            <input type="text" name="burl" id="shuru1" class="shuru" placeholder="请输入广告URL" />
+        </p>
+        <p>
+            <label for="shuru2">广告标题：</label>
+            <input type="text" name="btitle" id="shuru2" class="shuru" placeholder="请输入广告标题" />
+        </p>
+        <p>
+            <label>广告图片：</label>
+            <input type="file" name="bpic" />
+        </p>
+        <p class="queren">
+            <input type="submit" value="发布" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}

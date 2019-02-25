@@ -1,0 +1,24 @@
+{extend name="layout/base2"} {block name='title'}添加版块主题{/block} {block name='zhedie2'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Blocktheme/addBlockTheme')}">添加版块主题</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Blocktheme/insert" method="post">
+        <p>
+            <label for="shuru1">主题名称：</label>
+            <input type="text" name="bltname" id="shuru1" class="shuru" placeholder="请输入主题名称" />
+        </p>
+        <p>
+            <label for="shuru2">所属版块：</label>
+            <select name="bltblid" id="shuru2" class="shuru">
+                {volist name="res" id="vo"}
+                <option value="{$vo.blid}">{$vo['blname']}</option>
+                {/volist}
+            </select>
+        </p>
+        <p class="queren">
+            <input type="submit" value="添加" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}

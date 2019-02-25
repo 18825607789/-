@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>产品中心</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/static/js/js/li_hover.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/product_center_container.css" />
+	<body>
+		<!-- header begin -->
+		{include file="../application/index/view/Index/header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#header").load("header.html");
+			});
+		</script>
+		<div id="header"></div> -->
+		<!-- header end -->
+		<!-- container begin -->
+		<div id="container">
+			<!-- post 海报-->
+			<div class="poster">
+				<h2>产品中心/<label>Products</label></h2>
+			</div>
+			<!-- Product 商品 -->
+			<div class="product">
+				<div class="search">
+					<form action="" method="get">
+						<input type="search" name="key" placeholder="请输入商品名称" class="search_inp" /><input type="submit" value="搜索" class="sub_inp" />
+					</form>				
+				</div>
+				<div class="classification">
+					<ul>
+						<li class="current">客厅家具</li>
+						<li>书房家具</li>
+						<li>卧室家具</li>
+						<li>餐厅家具</li>
+					</ul>
+				</div>
+				<div class="product_list">
+					<div id="keting" style="display: block;">
+						<div class="text">
+							<div class="nav_title">
+								<a href="index.html">首页</a>&nbsp;>&nbsp;<a href="product_center.html">产品中心</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">客厅家具</a>
+							</div>
+							<div class="content">
+								<ul class="clearfix">
+									<?php 
+										$page=isset($_GET['page'])?$_GET['page']:1;
+										$start=($page-1)*6;
+										$pre=$page>1?$page-1:1;
+										require_once("../application/index/controller/connect.php");
+										$sqlcount="select count(*) from products where prprcid=1";
+										$resultcount=mysql_query($sqlcount);
+										$rowcount=mysql_fetch_row($resultcount);
+										$total=$rowcount[0];
+										$mpage=ceil($total/6);
+										$next=$page<$mpage?$page+1:$mpage;
+										$sql="select prid,prname,prpic from products where prprcid=1 limit $start,6";
+										$result=mysql_query($sql);
+										while($row=mysql_fetch_assoc($result))
+										{
+									?>
+									<li>
+										<a href="product_details.html?id=<?php echo($row['prid'])?>">
+											<img src="<?php echo($row['prpic']);?>" />
+											<span class="product_name"><?php echo($row['prname']);?></span>
+										</a>
+									</li>
+									<?php 
+										}
+									?>
+								</ul>
+							</div>
+							<div class="page">
+								<ul>
+									<?php 
+                                    	if($mpage>1){
+                                    ?>
+									<li><a href="product_center.html?page=1">&lt;&lt;</a></li>
+                                    <li><a href="product_center.html?page=<?php echo($pre);?>">&lt;</a></li>
+                                    <?php
+                                        $s=$page>1?$page-1:1;
+                                        $last=$page+1;
+                                        if($last>$mpage){
+                                        	$last=$mpage;
+                                        }
+                                        if($page==$mpage&&$page>2){
+                                        	$s=$page-1;
+                                        }
+                                        if($page>2){
+                                    ?>
+                                    <li>...</li>
+	                                <?php 
+	                                    }
+	                                ?>
+	                                <?php 
+	                                    for($i=$s;$i<=$last;$i++){
+	                                ?>
+									<li><a href="product_center.html?page=<?php echo($i);?>"><?php echo($i);?></a></li>
+                                    <?php
+	                                    }
+	                                    if($last<$mpage){ 
+	                                ?>
+	                                <li>...</li>
+	                                <?php 
+	                            		} 
+	                            	?>
+									<li><a href="product_center.html?page=<?php echo($next);?>">&gt;</a></li>
+									<li><a href="product_center.html?page=<?php echo($mpage)?>">&gt;&gt;</a></li>
+									<?php 
+	                            		} 
+	                            	?>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="shufang" style="display: none;">
+						<div class="text">
+							<div class="nav_title">
+								<a href="index.html">首页</a>&nbsp;>&nbsp;<a href="product_center.html">产品中心</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">客厅家具</a>
+							</div>
+							<div class="content">
+								<ul class="clearfix">
+									<?php 
+										$page1=isset($_GET['page1'])?$_GET['page1']:1;
+										$start1=($page1-1)*6;
+										$pre1=$page1>1?$page1-1:1;
+										require_once("../application/index/controller/connect.php");
+										$sqlcount1="select count(*) from products where prprcid=2";
+										$resultcount1=mysql_query($sqlcount1);
+										$rowcount1=mysql_fetch_row($resultcount1);
+										$total1=$rowcount1[0];
+										$mpage1=ceil($total1/6);
+										$next1=$page1<$mpage1?$page1+1:$mpage1;
+										$sql1="select prid,prname,prpic from products where prprcid=2 limit $start1,6";
+										$result1=mysql_query($sql1);
+										while($row1=mysql_fetch_assoc($result1))
+										{
+									?>
+									<li>
+										<a href="product_details.html?id=<?php echo($row1['prid'])?>">
+											<img src="<?php echo($row1['prpic']);?>" />
+											<span class="product_name"><?php echo($row1['prname']);?></span>
+										</a>
+									</li>
+									<?php 
+										}
+									?>
+								</ul>
+							</div>
+							<div class="page">
+								<ul>
+									<?php 
+                                    	if($mpage1>1){
+                                    ?>
+									<li><a href="product_center.html?page1=1">&lt;&lt;</a></li>
+                                    <li><a href="product_center.html?page1=<?php echo($pre1);?>">&lt;</a></li>
+                                    <?php
+                                        $s=$page1>1?$page1-1:1;
+                                        $last=$page1+1;
+                                        if($last1>$mpage1){
+                                        	$last1=$mpage1;
+                                        }
+                                        if($page1==$mpage1&&$page1>2){
+                                        	$s=$page1-1;
+                                        }
+                                        if($page1>2){
+                                    ?>
+                                    <li>...</li>
+	                                <?php 
+	                                    }
+	                                ?>
+	                                <?php 
+	                                    for($i=$s;$i<=$last1;$i++){
+	                                ?>
+									<li><a href="product_center.html?page1=<?php echo($i);?>"><?php echo($i);?></a></li>
+                                    <?php
+	                                    }
+	                                    if($last1<$mpage1){ 
+	                                ?>
+	                                <li>...</li>
+	                                <?php 
+	                            		} 
+	                            	?>
+									<li><a href="product_center.html?page1=<?php echo($next1);?>">&gt;</a></li>
+									<li><a href="product_center.html?page1=<?php echo($mpage1)?>">&gt;&gt;</a></li>
+									<?php 
+	                            		} 
+	                            	?>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="woshi" style="display: none;">
+						<div class="text">
+							<div class="nav_title">
+								<a href="index.html">首页</a>&nbsp;>&nbsp;<a href="product_center.html">产品中心</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">客厅家具</a>
+							</div>
+							<div class="content">
+								<ul class="clearfix">
+									<?php 
+										$page2=isset($_GET['page2'])?$_GET['page2']:1;
+										$start2=($page2-1)*6;
+										$pre2=$page2>1?$page2-1:1;
+										$sqlcount2="select count(*) from products where prprcid=3";
+										$resultcount2=mysql_query($sqlcount2);
+										$rowcount2=mysql_fetch_row($resultcount2);
+										$total2=$rowcount2[0];
+										$mpage2=ceil($total2/6);
+										$next2=$page2<$mpage2?$page2+1:$mpage2;
+										$sql2="select prid,prname,prpic from products where prprcid=3 limit $start2,6";
+										$result2=mysql_query($sql2);
+										while($row2=mysql_fetch_assoc($result2))
+										{
+									?>
+									<li>
+										<a href="product_details.html?id=<?php echo($row2['prid'])?>">
+											<img src="<?php echo($row2['prpic']);?>" />
+											<span class="product_name"><?php echo($row2['prname']);?></span>
+										</a>
+									</li>
+									<?php 
+										}
+									?>
+								</ul>
+							</div>
+							<div class="page">
+								<ul>
+									<?php 
+                                    	if($mpage2>1){
+                                    ?>
+									<li><a href="product_center.html?page2=1">&lt;&lt;</a></li>
+                                    <li><a href="product_center.html?page2=<?php echo($pre);?>">&lt;</a></li>
+                                    <?php
+                                        $s=$page2>1?$page2-1:1;
+                                        $last2=$page2+1;
+                                        if($last2>$mpage2){
+                                        	$last2=$mpage2;
+                                        }
+                                        if($page2==$mpage2&&$page2>2){
+                                        	$s=$page2-1;
+                                        }
+                                        if($page2>2){
+                                    ?>
+                                    <li>...</li>
+	                                <?php 
+	                                    }
+	                                ?>
+	                                <?php 
+	                                    for($i=$s;$i<=$last2;$i++){
+	                                ?>
+									<li><a href="product_center.html?page2=<?php echo($i);?>"><?php echo($i);?></a></li>
+                                    <?php
+	                                    }
+	                                    if($last2<$mpage2){ 
+	                                ?>
+	                                <li>...</li>
+	                                <?php 
+	                            		} 
+	                            	?>
+									<li><a href="product_center.html?page2=<?php echo($next2);?>">&gt;</a></li>
+									<li><a href="product_center.html?page2=<?php echo($mpage2)?>">&gt;&gt;</a></li>
+									<?php 
+	                            		} 
+	                            	?>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="canting" style="display: none;">
+						<div class="text">
+							<div class="nav_title">
+								<a href="index.html">首页</a>&nbsp;>&nbsp;<a href="product_center.html">产品中心</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">客厅家具</a>
+							</div>
+							<div class="content">
+								<ul class="clearfix">
+									<?php 
+										$page3=isset($_GET['page3'])?$_GET['page3']:1;
+										$start3=($page3-1)*6;
+										$pre3=$page3>1?$page3-1:1;
+										$sqlcount3="select count(*) from products where prprcid=4";
+										$resultcount3=mysql_query($sqlcount3);
+										$rowcount3=mysql_fetch_row($resultcount3);
+										$total3=$rowcount3[0];
+										$mpage3=ceil($total3/6);
+										$next3=$page3<$mpage3?$page3+1:$mpage3;
+										$sql3="select prid,prname,prpic from products where prprcid=4 limit $start3,6";
+										$result3=mysql_query($sql3);
+										while($row3=mysql_fetch_assoc($result3))
+										{
+									?>
+									<li>
+										<a href="product_details.html?id=<?php echo($row3['prid'])?>">
+											<img src="<?php echo($row3['prpic']);?>" />
+											<span class="product_name"><?php echo($row3['prname']);?></span>
+										</a>
+									</li>
+									<?php 
+										}
+									?>
+								</ul>
+							</div>
+							<div class="page">
+								<ul>
+									<?php 
+                                    	if($mpage3>1){
+                                    ?>
+									<li><a href="product_center.html?page3=1">&lt;&lt;</a></li>
+                                    <li><a href="product_center.html?page3=<?php echo($pre);?>">&lt;</a></li>
+                                    <?php
+                                        $s=$page3>1?$page3-1:1;
+                                        $last3=$page3+1;
+                                        if($last3>$mpage3){
+                                        	$last3=$mpage3;
+                                        }
+                                        if($page3==$mpage3&&$page3>2){
+                                        	$s=$page3-1;
+                                        }
+                                        if($page3>2){
+                                    ?>
+                                    <li>...</li>
+	                                <?php 
+	                                    }
+	                                ?>
+	                                <?php 
+	                                    for($i=$s;$i<=$last3;$i++){
+	                                ?>
+									<li><a href="product_center.html?page3=<?php echo($i);?>"><?php echo($i);?></a></li>
+                                    <?php
+	                                    }
+	                                    if($last3<$mpage3){ 
+	                                ?>
+	                                <li>...</li>
+	                                <?php 
+	                            		} 
+	                            	?>
+									<li><a href="product_center.html?page3=<?php echo($next3);?>">&gt;</a></li>
+									<li><a href="product_center.html?page3=<?php echo($mpage3)?>">&gt;&gt;</a></li>
+									<?php 
+	                            		} 
+	                            	?>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="search" style="display: none;">
+						<div class="text">
+							<div class="nav_title">
+								<a href="index.html">首页</a>&nbsp;>&nbsp;<a href="product_center.html">产品中心</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">客厅家具</a>
+							</div>
+							<div class="content">
+								<ul class="clearfix">
+									<?php 
+										$page4=isset($_GET['page4'])?$_GET['page4']:1;
+										$key=isset($_GET['key'])?$_GET['key']:"";
+										$start4=($page4-1)*6;
+										$pre4=$page4>1?$page4-1:1;
+										$sqlcount4="select count(*) from products where prname like '%$key%'";
+										$resultcount4=mysql_query($sqlcount4);
+										$rowcount4=mysql_fetch_row($resultcount4);
+										$total4=$rowcount4[0];
+										$mpage4=ceil($total4/6);
+										$next4=$page4<$mpage4?$page4+1:$mpage4;
+										$sql4="select prid,prname,prpic from products where prname like '%$key%' limit $start4,6";
+										$result4=mysql_query($sql4);
+										while($row4=mysql_fetch_assoc($result4))
+										{
+									?>
+									<li>
+										<a href="product_details.html?id=<?php echo($row4['prid'])?>">
+											<img src="<?php echo($row4['prpic']);?>" />
+											<span class="product_name"><?php echo($row4['prname']);?></span>
+										</a>
+									</li>
+									<?php 
+										}
+									?>
+								</ul>
+							</div>
+							<div class="page">
+								<ul>
+									<?php 
+                                    	if($mpage4>1){
+                                    ?>
+									<li><a href="product_center.html?key=<?php echo($key);?>&page4=1">&lt;&lt;</a></li>
+                                    <li><a href="product_center.html?key=<?php echo($key);?>&page4=<?php echo($pre);?>">&lt;</a></li>
+                                    <?php
+                                        $s=$page4>1?$page4-1:1;
+                                        $last4=$page4+1;
+                                        if($last4>$mpage4){
+                                        	$last4=$mpage4;
+                                        }
+                                        if($page4==$mpage4&&$page4>2){
+                                        	$s=$page4-1;
+                                        }
+                                        if($page4>2){
+                                    ?>
+                                    <li>...</li>
+	                                <?php 
+	                                    }
+	                                ?>
+	                                <?php 
+	                                    for($i=$s;$i<=$last4;$i++){
+	                                ?>
+									<li><a href="product_center.html?key=<?php echo($key);?>&page4=<?php echo($i);?>"><?php echo($i);?></a></li>
+                                    <?php
+	                                    }
+	                                    if($last4<$mpage4){ 
+	                                ?>
+	                                <li>...</li>
+	                                <?php 
+	                            		} 
+	                            	?>
+									<li><a href="product_center.html?key=<?php echo($key);?>&page4=<?php echo($next4);?>">&gt;</a></li>
+									<li><a href="product_center.html?key=<?php echo($key);?>&page4=<?php echo($mpage4)?>">&gt;&gt;</a></li>
+									<?php 
+	                            		} 
+	                            	?>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Index/footer.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#footer").load("footer.html");
+			});
+		</script>
+		<div id="footer"></div> -->
+		<!-- footer end -->
+	<script>
+    var url = location.search; //获取url中"?"符后的字串
+    if (url.indexOf("?") != -1) { //判断是否有参数
+        var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+        strs = str.split("="); //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+        if (strs[0] === 'page') {
+            $('#keting').css('display','block');
+            $('#shufang').css('display','none');
+            $('#woshi').css('display','none');
+            $('#canting').css('display','none');
+            $('#search').css('display','none');
+        }else if(strs[0] === 'page1'){
+        	$('#keting').css('display','none');
+            $('#shufang').css('display','block');
+            $('#woshi').css('display','none');
+            $('#canting').css('display','none');
+            $('#search').css('display','none');
+        }else if(strs[0] === 'page2'){
+        	$('#keting').css('display','none');
+            $('#shufang').css('display','none');
+            $('#woshi').css('display','block');
+            $('#canting').css('display','none');
+            $('#search').css('display','none');
+        }else if(strs[0] === 'page3'){
+        	$('#keting').css('display','none');
+            $('#shufang').css('display','none');
+            $('#woshi').css('display','none');
+            $('#canting').css('display','block');
+            $('#search').css('display','none');
+        }else if(strs[0] === 'key'||strs[0] === 'page4'){
+        	$('#keting').css('display','none');
+            $('#shufang').css('display','none');
+            $('#woshi').css('display','none');
+            $('#canting').css('display','none');
+            $('#search').css('display','block');
+        }
+    }
+    </script>
+	</body>
+</html>

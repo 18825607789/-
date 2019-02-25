@@ -1,0 +1,45 @@
+{extend name="layout/base"} {block name='title'}新闻列表{/block} {block name='zhedie2'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/News/newList')}">新闻列表</a></p>
+</div>
+<div class="neirong">
+    <form>
+        <table>
+            <tr>
+                <th>新闻ID</th>
+                <th>新闻标题</th>
+                <th>发布日期</th>
+                <th>封面图片</th>
+                <th>操作</th>
+            </tr>
+            {volist name="res" id="vo"}
+            <?php 
+            $count--;
+            if($count%2==0){
+                $clssname="even";;
+            }
+            else{
+                $clssname="old";
+            }
+            ?>
+            <tr class="<?php echo($clssname);?>">
+                <td>{$vo['nid']}</td>
+                <td>{$vo['ntitle']}</td>
+                <td><img src="{$vo['npic']}" /></td>
+                <td>{$vo['ndate']}</td>
+                <td>
+                    <a href="{:url('admin/News/edit',['id' => $vo['nid'],'p' => $id])}"><i class="icon-edit"></i>修改</a>
+                    <a href="{:url('admin/News/delete',['id' => $vo['nid']])}"><i class="icon-trash"></i>删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">
+            <a href="{:url('admin/News/newList',['id' => 1])}">首页</a>
+            <a href="{:url('admin/News/newList',['id' => $pre])}">上一页</a>
+            <a href="{:url('admin/News/newList',['id' => $next])}">下一页</a>
+            <a href="{:url('admin/News/newList',['id' => $max])}">未页</a>
+        </div>
+    </form>
+</div>
+{/block}

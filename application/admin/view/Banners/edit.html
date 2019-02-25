@@ -1,0 +1,27 @@
+{extend name="layout/base"} {block name='title'}添加广告{/block} {block name='zhedie3'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Banners/bannerList',['id' => $p])}">广告列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Banners/edit',['id' => $res->bid,'p' => $p])}">修改</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Banners/update" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$res->bid}">
+        <input type="hidden" name="pic" value="{$res->bpic}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label for="shuru1">广告URL：</label>
+            <input type="text" name="burl" id="shuru1" class="shuru" value="{$res->burl}" />
+        </p>
+        <p>
+            <label for="shuru2">广告标题：</label>
+            <input type="text" name="btitle" id="shuru2" class="shuru" value="{$res->btitle}" />
+        </p>
+        <p>
+            <label>广告图片：</label>
+            <input type="file" name="bpic" value="{$res->bpic}" />
+        </p>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}

@@ -1,0 +1,26 @@
+{extend name="layout/base"} {block name='title'}查看留言{/block} {block name='zhedie6'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Message/messageList',['id' => $p])}">留言列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/Message/checkMessage',['id' => $res->mid,'p' => $p])}">查看留言</a><i class="icon-chevron-right"></i><a href="{:url('admin/Message/answerMessage',['id' => $res->mid,'p' => $p])}">回复留言</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Message/update" method="post">
+        <input type="hidden" name="id" value="{$res->mid}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label>回复内容：</label>
+            <textarea name="manswer" class="textshuru">
+                {$res->manswer}
+            </textarea>
+        </p>
+        <p class="queren">
+            <input type="submit" value="回复" class="subBtn" />
+        </p>
+    </form>
+</div>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckfinder/ckfinder.js"></script>
+<script>
+var editor = CKEDITOR.replace("manswer");
+CKFinder.setupCKEditor(editor, '/static/ckfinder/');
+</script>
+{/block}

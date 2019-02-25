@@ -1,0 +1,42 @@
+{extend name="layout/base"} {block name='title'}添加新闻{/block} {block name='zhedie2'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/News/newList',['id' => $p])}">新闻列表</a><i class="icon-chevron-right"></i><a href="{:url('admin/News/edit',['id' => $res->nid,'p' => $p])}">修改</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/News/update" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$res->nid}">
+        <input type="hidden" name="pic" value="{$res->npic}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label for="shuru1">新闻标题：</label>
+            <input type="text" name="ntitle" id="shuru1" class="shuru" value="{$res->ntitle}" />
+        </p>
+        <p>
+            <label>新闻类型：</label>
+            <input type="radio" name="nclass" id="xuanze1" value="公司新闻" checked />
+            <label for="xuanze1" class="xuanze">公司新闻</label>
+            <input type="radio" name="nclass" id="xuanze2" value="行业动态" radio />
+            <label for="xuanze2" class="xuanze">行业动态</label>
+        </p>
+        <p>
+            <label>封面图片：</label>
+            <input type="file" name="npic" />
+        </p>
+        <p>
+            <label>新闻内容：</label>
+            <div class="textbox">
+                <textarea name="ncontent" class="textshuru">{$res->ncontent}</textarea>
+            </div>
+        </p>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+    </form>
+</div>
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script src="/static/ckfinder/ckfinder.js"></script>
+<script>
+var editor = CKEDITOR.replace("ncontent");
+CKFinder.setupCKEditor(editor, '/static/ckfinder/');
+</script>
+{/block}

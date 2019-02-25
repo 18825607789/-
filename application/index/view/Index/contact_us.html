@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>联系我们</title>
+</head>
+<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/static/js/js/contact_ways_code.js"></script>
+<script type="text/javascript" src="/static/js/js/map.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+<link rel="shortcut icon" href="/static/img/logo.ico" />
+<link rel="stylesheet" href="/static/css/css/public.css" />
+<link rel="stylesheet" href="/static/css/css/contact_us_container.css" />
+<style type="text/css">
+.iw_poi_title {
+    color: #CC5522;
+    font-size: 14px;
+    font-weight: bold;
+    overflow: hidden;
+    padding-right: 13px;
+    white-space: nowrap;
+}
+
+.iw_poi_content {
+    font: 12px arial, sans-serif;
+    overflow: visible;
+    padding-top: 4px;
+    white-space: -moz-pre-wrap;
+    word-wrap: break-word;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+</style>
+
+<body>
+    <!-- header begin -->
+    {include file="../application/index/view/Index/header.html"}
+    <!-- <script>
+			$(document).ready(function(e){
+				$("#header").load("header.html");
+			});
+		</script>
+		<div id="header"></div> -->
+    <!-- header end -->
+    <!-- container begin -->
+    <div id="container">
+        <!-- post 海报-->
+        <div class="poster">
+            <h2>联系我们/<label>Content us</label></h2>
+        </div>
+        <div class="contact">
+            <div class="text">
+                <div class="nav_title">
+                    <a href="index.html">首页</a>&nbsp;>&nbsp;<a href="contact_us.html" style="color: #5E2B0C;">联系我们</a>
+                </div>
+                <div class="content">
+                    <form action="/admin/Message/insert" method="post">
+                        <div class="contact_way">
+                            <h2>联系方式</h2>
+                            <ul class="clearfix">
+                                <li>
+                                    <div class="company_information ">
+                                        <div class="company_name ">
+                                            挫啄实木家具有限公司
+                                        </div>
+                                        <div class="contact_way_code ">
+                                            <ul>
+                                                <li class="qq ">
+                                                    <span class="code qq_code ">
+	                                                        <img src="/static/img/contect_ways_code/qq_code.png " />
+	                                                    </span>
+                                                </li>
+                                                <li class="wechat ">
+                                                    <span class="code wechat_code ">
+	                                                        <img src="/static/img/contect_ways_code/wechat_code.png " />
+	                                                    </span>
+                                                </li>
+                                                <li class="sina ">
+                                                    <span class="code sina_code ">
+	                                                        <img src="/static/img/contect_ways_code/weibo_code.png " />
+	                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="company_information ">
+                                        <div class="contact_ways ">
+                                            <span class="ways address ">地址：广州市天河区黄埔大道西261号</span>
+                                            <span class="ways postcode ">邮编：510000</span>
+                                            <span class="ways phone_number ">电话：400-888-8888</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style="border: none; ">
+                                    <div class="company_information ">
+                                        <div class="contact_ways ">
+                                            <span class="ways mobile_phone ">手机：188-2560-7789</span>
+                                            <span class="ways fax ">传真：000-66668888</span>
+                                            <span class="ways e_mail ">邮箱：2586823101@qq.com</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="message ">
+                            <h2>在线留言</h2>
+                            <div class="message_input ">
+                                <div class="customer_information ">
+                                    <input type="text" name="mname" class="inp uname " placeholder="姓名 " />
+                                    <input type="email" name="memail" id="me-mail" class="inp email " placeholder="邮箱 " />
+                                    <input type="number" name="mphone" class="inp phone " placeholder="手机 " />
+                                </div>
+                                <div class="message_contents ">
+                                    <textarea name="mcontent" class="ucontect " placeholder="内容 "></textarea>
+                                </div>
+                                <div class="checkno_submit ">
+                                    <input type="text" placeholder="验证码 " name="checkno" class="checkno " />
+                                    <img src="/admin/Checkno/show_captcha" alt="" onclick="this.src=this.src+'?'" />
+                                    <input type="submit" value="提交" class="submit " />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="web_map">
+                            <h2>网站地图</h2>
+                            <div class="map" id="map" style="width: 90%; height: 350px; border: 1px solid #666666; margin: 0 auto;"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container end -->
+    <!-- footer begin -->
+    {include file="../application/index/view/Index/footer.html"}
+    <!-- <script>
+			$(document).ready(function(e){
+				$("#footer").load("footer.html");
+			});
+		</script>
+		<div id="footer"></div> -->
+    <!-- footer end -->
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+	</head>
+	<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+	<link rel="shortcut icon" href="/static/img/logo.ico"/>
+	<link rel="stylesheet" href="/static/css/css/public.css" />
+	<link rel="stylesheet" href="/static/css/css/register.css" />
+	<body>
+		<!-- forum_header begin 论坛头部-->
+		{include file="../application/index/view/Forum/forum_header.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#forum_header").load("forum_header.html");
+			});
+		</script>
+		<div id="forum_header"></div> -->
+		<!-- forum_header end-->
+		<!-- container begin -->
+		<div id="container">
+			<div class="register">
+				<h2>新用户注册</h2>
+				<form action="admin/Users/insert" method="post">
+                    <input type="text" class="uname" name="uname" placeholder="请输入用户名" />
+                    <span></span>
+					<input type="email" class="uname" name="uemail" placeholder="请输入邮箱" />
+					<span></span>
+					<input type="password" class="upassword" name="upwd" placeholder="请输入密码" />
+					<span></span>
+					<input type="password" class="repassword" name="upassword" placeholder="请再次输入密码" />
+					<span></span>
+					<input type="text" name="checkno" class="checkno" placeholder="验证码"/>
+					<img src="/admin/Checkno/show_captcha" alt="" onclick="this.src=this.src+'?'" width="15.8%" height="11%" /> 
+					<input type="submit" class="sub_btn" value="注册"/>
+				</form>
+			</div>
+		</div>
+		<!-- container end -->
+		<!-- footer begin -->
+		{include file="../application/index/view/Index/footer.html"}
+		<!-- <script>
+			$(document).ready(function(e){
+				$("#footer").load("footer.html");
+			});
+		</script>
+		<div id="footer"></div> -->
+		<!-- footer end -->
+	</body>
+</html>

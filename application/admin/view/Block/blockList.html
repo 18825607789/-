@@ -1,0 +1,43 @@
+{extend name="layout/base2"} {block name='title'}版块列表{/block} {block name='zhedie2'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Block/blockList')}">版块列表</a></p>
+</div>
+<div class="neirong">
+    <form>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>分区名称</th>
+                <th>分区版主</th>
+                <th>操作</th>
+            </tr>
+            {volist name="res" id="vo"}
+            <?php 
+            $count--;
+            if($count%2==0){
+                $clssname="even";;
+            }
+            else{
+                $clssname="old";
+            }
+            ?>
+            <tr class="<?php echo($clssname);?>">
+                <td>{$vo['blid']}</td>
+                <td>{$vo['blname']}</td>
+                <td>{$res3[$vo['bluid']]}</td>
+                <td>
+                    <a href="{:url('admin/Block/edit',['id' => $vo['blid'],'p' => $id])}"><i class="icon-edit"></i>修改</a>
+                    <a href="{:url('admin/Block/delete',['id' => $vo['blid']])}"><i class="icon-trash"></i>删除</a>
+                </td>
+            </tr>
+            {/volist}
+        </table>
+        <div class="page">
+            <a href="{:url('admin/Block/BlockList',['id' => 1])}">首页</a>
+            <a href="{:url('admin/Block/BlockList',['id' => $pre])}">上一页</a>
+            <a href="{:url('admin/Block/BlockList',['id' => $next])}">下一页</a>
+            <a href="{:url('admin/Block/BlockList',['id' => $max])}">未页</a>
+        </div>
+    </form>
+</div>
+{/block}

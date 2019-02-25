@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>新闻列表</title>
+</head>
+<script type="text/javascript" src="/static/js/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/static/js/js/li_hover.js"></script>
+<link rel="shortcut icon" href="/static/img/logo.ico" />
+<link rel="stylesheet" href="/static/css/css/public.css" />
+<link rel="stylesheet" href="/static/css/css/news_list_container.css" />
+<body>
+    <!-- header begin -->
+    {include file="../application/index/view/Index/header.html"}
+    <!-- <script>
+			$(document).ready(function(e){
+				$("#header").load("header.html");
+			});
+		</script>
+		<div id="header"></div> -->
+    <!-- header end -->
+    <!-- container begin -->
+    <div id="container">
+        <!-- post 海报-->
+        <div class="poster">
+            <h2>新闻中心/<label>News</label></h2>
+        </div>
+        <!-- news 新闻 -->
+        <div class="news_content">
+            <div class="classification">
+                <ul>
+                    <li class="current">公司新闻</li>
+                    <li>行业动态</li>
+                </ul>
+            </div>
+            <div class="news_lists">
+                <div id="xinwen" style="display: block;">
+                    <div class="text">
+                        <div class="nav_title">
+                            <a href="index.html">首页</a>&nbsp;>&nbsp;<a href="news_list.html">新闻中心</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">公司新闻</a>
+                        </div>
+                        <div class="content">
+                            <ul class="clearfix">
+                                <?php
+									$page=isset($_GET['page'])?$_GET['page']:1;
+									$start=($page-1)*1;
+									$pre=$page>1?$page-1:1;
+									require_once("../application/index/controller/connect.php");
+									$sqlcount="select count(*) from news where nclass='公司新闻'";
+									$resultcount=mysql_query($sqlcount);
+									$rowcount=mysql_fetch_row($resultcount);
+									$total=$rowcount[0];
+									$mpage=ceil($total/1);
+									$next=$page<$mpage?$page+1:$mpage;
+
+									$sql="select nid,npic,ntitle,ndate,ncontent from news where nclass='公司新闻' order by ndate desc limit $start,1";
+									$result=mysql_query($sql);
+									while($row=mysql_fetch_assoc($result))
+									{
+								?>
+                                <li>
+                                    <a href="news_detail.html?id=<?php echo($row['nid'])?>">
+										<img src="<?php echo($row['npic'])?>" />
+										<span class="problem">
+											<?php echo($row['ntitle'])?>
+										</span>
+										<span class="time">
+											<?php echo($row['ndate'])?>
+										</span>
+										<span class="news_contents">
+											<?php echo($row['ncontent'])?>
+										</span>
+										<span class="right_arrow">
+											<img src="/static/img/right_arrow.png" width="100% " height="100% "/>
+										</span>
+									</a>
+                                </li>
+                                <?php
+								    }
+								?>
+                            </ul>
+                        </div>
+                        <div class="page">
+                            <ul>
+                                <li><a href="news_list.html?page=1">&lt;&lt;</a></li>
+                                <li><a href="news_list.html?page=<?php echo($pre)?>">&lt;</a></li>
+                                <?php
+                                    $s=$page>1?$page-1:1;
+                                    $last=$page+1;
+                                    if($last>$mpage){
+                                    	$last=$mpage;
+                                    }
+                                    if($page==$mpage&&$page>2){
+                                    	$s=$page-1;
+                                    }
+                                    if($page>2){
+                                    ?>
+                                    <li>...</li>
+                                <?php 
+                                    }
+                                ?>
+                                <?php 
+                                    for($i=$s;$i<=$last;$i++){
+                                ?>
+								<li><a href="news_list.html?page=<?php echo($i);?>"><?php echo($i);?></a></li>
+                                <?php
+                                    }
+                                    if($last<$mpage){ 
+                                ?>
+                                <li>...</li>
+                                <?php 
+                            		} 
+                            	?>
+                                <li><a href="news_list.html?page=<?php echo($next)?>">&gt;</a></li>
+                                <li><a href="news_list.html?page=<?php echo($mpage)?>">&gt;&gt;</a></li>
+                                <!-- <li class="current">1</li>
+									<li>2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>...</li>
+									<li>19</li>
+									<li>></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="hangnei" style="display: none;">
+                    <div class="text">
+                        <div class="nav_title">
+                            <a href="index.html">首页</a>&nbsp;>&nbsp;<a href="news_list.html">新闻中心</a>&nbsp;>&nbsp;<a href="#" style="color: #5E2B0C;">行业动态</a>
+                        </div>
+                        <div class="content">
+                            <div class="dynamic">
+                                <ul class="clearfix">
+                                    <?php
+										$page1=isset($_GET['page1'])?$_GET['page1']:1;
+										$start1=($page1-1)*1;
+										$pre1=$page1>1?$page1-1:1;
+										$sqlcount1="select count(*) from news where nclass='行业动态'";
+										$resultcount1=mysql_query($sqlcount1);
+										$rowcount1=mysql_fetch_row($resultcount1);
+										$total1=$rowcount1[0];
+										$mpage1=ceil($total1/1);
+										$next1=$page1<$mpage1?$page1+1:$mpage1;
+
+										$sql1="select nid,ntitle,ndate,ncontent from news where nclass='行业动态' order by ndate desc limit $start1,1";
+										$result1=mysql_query($sql1);
+										while($row1=mysql_fetch_assoc($result1))
+										{
+								    ?>
+                                    <li>
+                                        <a href="profession_dynamic_detail.html?id=<?php echo($row1['nid'])?>">
+                                            <?php echo($row1['ntitle'])?><span class="times"><?php echo($row1['ndate'])?></span></a>
+                                    </li>
+                                    <?php
+								   		}
+									?>
+                                </ul>
+                                <div class="page">
+                                    <ul>
+                                    	<?php 
+                                        	if($mpage1>1){
+                                        ?>
+                                        <li><a href="news_list.html?page1=1">&nbsp;&lt;&lt;</a></li>
+                                        <li><a href="news_list.html?page1=<?php echo($pre1)?>">&nbsp;&nbsp;&lt;</a></li>
+                                        <?php
+	                                        $s=$page1>1?$page1-1:1;
+	                                        $last1=$page1+1;
+	                                        if($last1>$mpage1){
+	                                        	$last1=$mpage1;
+	                                        }
+	                                        if($page1==$mpage1&&$page1>2){
+	                                        	$s=$page1-1;
+	                                        }
+	                                        if($page1>2){
+                                        ?>
+                                        <li>...</li>
+		                                <?php 
+		                                    }
+		                                ?>
+		                                <?php 
+		                                    for($i=$s;$i<=$last1;$i++){
+		                                ?>
+										<li><a href="news_list.html?page1=<?php echo($i);?>">&nbsp;&nbsp;<?php echo($i);?></a></li>
+		                                <?php
+		                                    }
+		                                    if($last1<$mpage1){ 
+		                                ?>
+		                                <li>...</li>
+		                                <?php 
+		                            		}
+		                            	?>
+                                        <li><a href="news_list.html?page1=<?php echo($next1)?>">&nbsp;&nbsp;&nbsp;&gt;</a></li>
+                                        <li><a href="news_list.html?page1=<?php echo($mpage1)?>">&nbsp;&gt;&gt;</a></li>
+                                        <?php 
+		                            		}
+		                            	?>
+                                        <!-- <li class="current">1</li>
+											<li>2</li>
+											<li>3</li>
+											<li>4</li>
+											<li>...</li>
+											<li>19</li>
+											<li>></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container end -->
+    <!-- footer begin -->
+    {include file="../application/index/view/Index/footer.html"}
+    <!-- <script>
+			$(document).ready(function(e){
+				$("#footer").load("footer.html");
+			});
+		</script>
+		<div id="footer"></div> -->
+    <!-- footer end -->
+    <script>
+    var url = location.search; //获取url中"?"符后的字串
+    if (url.indexOf("?") != -1) { //判断是否有参数
+        var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+        strs = str.split("="); //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+        if (strs[0] == 'page') {
+            $('#xinwen').css('display','block');
+            $('#hangnei').css('display','none');
+        }else if(strs[0] == 'page1'){
+        	$('#xinwen').css('display','none');
+        	$('#hangnei').css('display','block');
+        }
+    }
+    </script>
+</body>
+
+</html>

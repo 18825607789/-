@@ -1,0 +1,26 @@
+{extend name="layout/base2"} {block name='title'}添加版块主题{/block} {block name='zhedie2'}zhediexian{/block} {block name="right-content"}
+<div class="weizhi">
+    <p>当前位置<i class="icon-chevron-right"></i><a href="{:url('admin/Blocktheme/blockThemeList',['id' => $p])}">添加版块主题</a><i class="icon-chevron-right"></i><a href="{:url('admin/Blocktheme/edit',['id' => $res->bltid,'p' => $p])}">修改</a></p>
+</div>
+<div class="neirong">
+    <form action="/admin/Blocktheme/update" method="post">
+        <input type="hidden" name="id" value="{$res->bltid}">
+        <input type="hidden" name="p" value="{$p}">
+        <p>
+            <label for="shuru1">主题名称：</label>
+            <input type="text" name="bltname" id="shuru1" class="shuru" value="{$res->bltname}" />
+        </p>
+        <p>
+            <label for="shuru2">所属版块：</label>
+            <select name="bltblid" id="shuru2" class="shuru">
+                {volist name="res2" id="vo"}
+                <option value="{$vo.blid}"<?php if($res->bltblid==$vo['blid']) echo 'selected'; ?>>{$vo['blname']}</option>
+                {/volist}
+            </select>
+        </p>
+        <p class="queren">
+            <input type="submit" value="更新" class="subBtn" />
+        </p>
+    </form>
+</div>
+{/block}
